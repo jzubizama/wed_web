@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx/.
+    image: nginx:42
+    ports:
+     - "443:443"
+    networks:
+      - mynetwork
+    volumes:
+      - wp_vol:/var/www/html
+    depends_on:
+      - wordpress
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb/.
+    image: mariadb:42
+    volumes:
+      - db_vol:/var/lib/mysql
+    networks:
+      - mynetwork
+    env_file:
+      - .env 
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress/.
+    image: wordpress:42
+    volumes:
+      - wp_vol:/var/www/html
+    depends_on:
+      - mariadb
+    networks:
+      - mynetwork
+    env_file:
+      - .env
+
+volumes:
+  wp_vol:
+    driver: local
+    driver_opts:
+      type: volume
+      device: /home/josu/data/wordpress
+      o: bind
+  db_vol:
+    driver: local
+    driver_opts:
+      type: volume
+      device: /home/josu/data/db
+      o: bind
+networks:
+  mynetwork:
+    driver: bridge
