@@ -1,4 +1,4 @@
-FROM debian:bookworm-backports
+FROM debian:bullseye
 #FROM debian:bullseye
 
 # Set environment variables
