@@ -1,4 +1,4 @@
-FROM debian:bookworm-backports
+FROM debian:bullseye
 
 #Install Nginx in the image
 RUN		apt-get update
