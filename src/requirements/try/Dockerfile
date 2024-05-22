@@ -10,8 +10,8 @@ FROM debian:bullseye
 #ENV WP_ADMIN_USER=jzubizar
 #ENV WP_ADMIN_PASSWORD=1234
 
-COPY ./tools/setup.sh /tmp
-RUN chmod +x /tmp/setup.sh
+#COPY ./tools/setup.sh /tmp
+#RUN chmod +x /tmp/setup.sh
 
 #Installation php-fpm, php-mysql, curl, netcat
 RUN apt update && apt install -y php-fpm php-mysql curl netcat-openbsd
@@ -24,17 +24,17 @@ RUN mkdir /var/www && mkdir /var/www/html
 
 WORKDIR /var/www/html
 
-#RUN rm -rf *
-
-RUN sed -i 's/^pid = \/run\/php\/php7\.4-fpm\.pid$/pid = \/var\/run\/php-fpm7.4.pid/' /etc/php/7.4/fpm/php-fpm.conf
+RUN rm -rf *
 
 #Download wordpress and creat config file in /var/www/html
-RUN wp core download --locale=es_ES --allow-root
-#Copy the php-fpm configuration file with the listening in 9000 command
-COPY ./conf/www.conf  /etc/php/7.4/fpm/pool.d/
+#RUN wp core download --locale=es_ES --allow-root \
+#&& wp config create --dbname=${MYSQL_DATABASE} --dbuser=${MYSQL_USER} --dbpass=${MYSQL_PASSWORD} --dbhost=${MYSQL_HOST} --allow-root --skip-check
 
-EXPOSE 9000
+#Copy the php-fpm configuration file with the listening in 9000 command
+#COPY ./conf/www.conf  /etc/php/8.2/fpm/pool.d/
+
+#EXPOSE 9000
 
 #exec Wordpress instalation and php-fpm service to listen
-CMD [ "sh", "-c", "/tmp/setup.sh && /usr/sbin/php-fpm7.4 -F" ]
+#CMD [ "sh", "-c", "/tmp/setup.sh && /usr/sbin/php-fpm8.2 -F" ]
 #CMD [ "sh", "-c", "/tmp/setup.sh"]

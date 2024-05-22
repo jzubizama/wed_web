@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Change MariaDB ownership of the data directory
-chown -R mysql /var/lib/mysql
+chown -R mysql:mysql /var/lib/mysql
 
 #Coment unnecesary lines in the configuration file
 sed -i "s/^bind-address\s*=.*$/#bind-address = 127.0.0.1/"  /etc/mysql/mariadb.conf.d/50-server.cnf
@@ -11,4 +11,9 @@ sed -i "s/^bind-address\s*=.*$/#bind-address = 127.0.0.1/"  /etc/mysql/mariadb.c
 sed -i 's/^socket\s*=.*/socket=\/var\/run\/mysqld\/mysqld.sock/' /etc/mysql/mariadb.cnf
 sed -i "s/#\?\s*port\s*=.*/port=3306/" /etc/mysql/mariadb.cnf
 
+#service mariadb restart
+
+
+/etc/init.d/mariadb restart
+chmod +x /tmp/create.sh
 service mariadb restart
