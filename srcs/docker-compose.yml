@@ -41,13 +41,13 @@ volumes:
     driver: local
     driver_opts:
       type: volume
-      device: /home/josu/data/wordpress
+      device: /home/jzubizar/data/wordpress
       o: bind
   db_vol:
     driver: local
     driver_opts:
       type: volume
-      device: /home/josu/data/db
+      device: /home/jzubizar/data/db
       o: bind
 networks:
   mynetwork:

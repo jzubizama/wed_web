@@ -1,7 +1,7 @@
 all:
-	sudo docker-compose -f src/docker-compose.yml  up -d --build
+	docker-compose -f srcs/docker-compose.yml  up -d --build
 down:
-	sudo docker-compose -f src/docker-compose.yml  down
+	docker-compose -f srcs/docker-compose.yml  down
 clean: down
-	yes | sudo docker system prune -a
+	yes | docker system prune -a
 .PHONY: all down clean
