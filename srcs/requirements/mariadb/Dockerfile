@@ -1,14 +1,6 @@
 FROM debian:bullseye
-#FROM debian:bullseye
-
-# Set environment variables
-ENV MYSQL_DATABASE=wordpress
-#ENV MYSQL_USER=jzubizar
-#ENV MYSQL_PASSWORD=1234
-#ENV MYSQL_ROOT_PASSWORD=root1234
 
 #Install and start mariadb
-#RUN rm -rf /var/lib/mysql/*
 RUN apt-get update && apt-get install -y mariadb-server
 RUN service mariadb start
 

@@ -1,15 +1,5 @@
 FROM debian:bullseye
 
-# Set environment variables
-#ENV MYSQL_DATABASE=wordpress
-#ENV MYSQL_USER=jzubizar
-#ENV MYSQL_PASSWORD=1234
-#ENV MYSQL_ROOT_PASSWORD=root1234
-#ENV MYSQL_HOST=mariadb
-#ENV DOMAIN_NAME=jzubizar.42.fr
-#ENV WP_ADMIN_USER=jzubizar
-#ENV WP_ADMIN_PASSWORD=1234
-
 COPY ./tools/setup.sh /tmp
 RUN chmod +x /tmp/setup.sh
 
@@ -24,8 +14,6 @@ RUN mkdir /var/www && mkdir /var/www/html
 
 WORKDIR /var/www/html
 
-#RUN rm -rf *
-
 RUN sed -i 's/^pid = \/run\/php\/php7\.4-fpm\.pid$/pid = \/var\/run\/php-fpm7.4.pid/' /etc/php/7.4/fpm/php-fpm.conf
 
 #Download wordpress and creat config file in /var/www/html
@@ -37,4 +25,3 @@ EXPOSE 9000
 
 #exec Wordpress instalation and php-fpm service to listen
 CMD [ "sh", "-c", "/tmp/setup.sh && /usr/sbin/php-fpm7.4 -F" ]
-#CMD [ "sh", "-c", "/tmp/setup.sh"]
