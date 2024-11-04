@@ -7,6 +7,7 @@ services:
     image: nginx:42
     ports:
      - "443:443"
+     - "80:80"
     networks:
       - mynetwork
     volumes:
