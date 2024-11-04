@@ -23,8 +23,8 @@ server {
         listen [::]:443 ssl;
 
         #paths for private key and SSL certificates files
-	#ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
-	#ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+	ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
 
         server_name jzubizar.42.fr;
         # SSL configuration
@@ -81,7 +81,7 @@ server {
 	#ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 	#ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
 
-        server_name jzubizar.42.fr;
+        server_name http_jzubizar.42.fr;
         # SSL configuration
         #
         # listen 443 ssl default_server;
